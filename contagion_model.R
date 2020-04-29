@@ -1,7 +1,7 @@
 library(minpack.lm)
 
 
-fit_contagion_model <- function(country,start=0,end=-1) {
+fit_contagion_model <- function(country,start=1,end=-1) {
   
   if (end == -1){
     end = get_country_dataset_length(country)
@@ -12,8 +12,8 @@ fit_contagion_model <- function(country,start=0,end=-1) {
   requested_subset <- country_real_data[start:end]
   len_subset <- length(requested_subset)
   
-  dataset_xy_points<- list("M" = len_subset, "x" = c(1:len_dataset),"Y" = country_real_data)
-  subset_xy_points <- list("M" = len_subset, "x" = c(1:len_subset),"Y" = requested_subset)
+  dataset_xy_points<- list("M" = len_dataset, "x" = c(1:len_dataset),"Y" = country_real_data)
+  subset_xy_points <- list("M" = len_subset, "x" = c(start:end),"Y" = requested_subset)
   
   nlm_fit <- obtain_nlm_fit(subset_xy_points)
   coefs <- coef(nlm_fit)
