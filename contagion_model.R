@@ -1,20 +1,32 @@
 library(minpack.lm)
 
-source("data_io.R")
 
+fit_contagion_model <- function(country,start=0,end=-1) {
+  
+  if (end == -1){
+    end = get_country_dataset_length(country)
+  }
 
-fit_contagion_model <- function(country) {
-  data_url = "https://covid.ourworldindata.org/data/ecdc/total_cases.csv"
-  dataset = read_csv_data(data_url)
-  country_data <- dataset[[country]][31:length(dataset[[country]])]
-  len_subset <- length(country_data)
-  country_dataset <- list("M" = len_subset, "x" = c(1:len_subset),"Y" = country_data)
-  nlm_fit <- obtain_nlm_fit(country_dataset)
+  country_real_data <- get_data_from_country(country)
+  len_dataset <- length(country_real_data)
+  requested_subset <- country_real_data[start:end]
+  len_subset <- length(requested_subset)
+  
+  dataset_xy_points<- list("M" = len_subset, "x" = c(1:len_dataset),"Y" = country_real_data)
+  subset_xy_points <- list("M" = len_subset, "x" = c(1:len_subset),"Y" = requested_subset)
+  
+  nlm_fit <- obtain_nlm_fit(subset_xy_points)
   coefs <- coef(nlm_fit)
-  plot(Y ~ x,data=country_dataset,type='l')
+  
+  plot(Y ~ x,data=dataset_xy_points,type='l')
   lines(0:100, predict(nlm_fit, newdata = data.frame(x = 0:100)), col='red')
+  
 }
 
 obtain_nlm_fit <- function(country_dataset){
-  nlm <- nlsLM(Y ~ 1/b * ((1 + a * x)^b - 1), data=country_dataset, start=list(a=0.1, b=1))
+  nlm <- nlsLM(Y ~ ((1 + a * x)^b - 1)/b, data=country_dataset, start=list(a=0.1, b=1))
+}
+
+contagion_mean_value_function <- function(x,a,b){
+  y <- ((1 + a * x)^b - 1)/b
 }
