@@ -22,6 +22,7 @@ Example 1. You want to fit the whole dataset from Italy. After initializing, you
 
 Example 2. You want to fit the whole dataset from Antigua and Barbuda, but you aren't sure how to write it. Then, you execute
 >show_availiable_countries()
+
 and take a look at the list. It is shown as "Antigua.and.Barbuda", so the command you need is
 >fit_contagion_model("Antigua.and.Barbuda")
 
