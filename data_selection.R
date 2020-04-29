@@ -2,6 +2,7 @@ show_availiable_countries <- function(){
   n_of_columns <- length(total_cases_dataset[1,])
   names <- colnames(total_cases_dataset)
   countries <- names[-1:-2]
+  print(countries)
 }
 
 get_data_from_country <- function(country){
