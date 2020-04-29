@@ -1,7 +1,7 @@
 library(minpack.lm)
 
 
-fit_contagion_model <- function(country,start=1,end=-1) {
+fit_contagion_model <- function(country, predict_until=end, start=1, end=-1) {
   
   if (end == -1){
     end = get_country_dataset_length(country)
@@ -18,15 +18,12 @@ fit_contagion_model <- function(country,start=1,end=-1) {
   nlm_fit <- obtain_nlm_fit(subset_xy_points)
   coefs <- coef(nlm_fit)
   
-  plot(Y ~ x,data=dataset_xy_points,type='l')
-  lines(0:100, predict(nlm_fit, newdata = data.frame(x = 0:100)), col='red')
-  
+  title <- paste("Total cases in", country,sep=" ", collapse=NULL)
+  plot(Y ~ x, data=dataset_xy_points, type='l', main=title, xlab="t (Days)", ylab="Nº of cases")
+  lines(0:predict_until, predict(nlm_fit, newdata = data.frame(x = 0:predict_until)), col='red')
+  legend("topleft", c("Observed cases","Model prediction"), fill=c("black","red"))
 }
 
 obtain_nlm_fit <- function(country_dataset){
   nlm <- nlsLM(Y ~ ((1 + a * x)^b - 1)/b, data=country_dataset, start=list(a=0.1, b=1))
-}
-
-contagion_mean_value_function <- function(x,a,b){
-  y <- ((1 + a * x)^b - 1)/b
 }
