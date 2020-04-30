@@ -1,4 +1,4 @@
-# coronavirus_contagion_model
+# covid19_contagion_model
 
 SOURCE: the data we use comes from the Our World In Data website: https://ourworldindata.org/coronavirus-source-data
 
