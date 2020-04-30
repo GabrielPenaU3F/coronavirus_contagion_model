@@ -17,3 +17,7 @@ find_first_nonzero_day_in_country_data <- function(country){
   data <- as.vector(get_data_from_country(country))
   first_nonzero_day <- min(which(data > 0))
 }
+
+show_data_from_country <- function(country){
+  print(get_data_from_country(country))
+}

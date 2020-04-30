@@ -7,12 +7,14 @@ USAGE
 1. SET UP:
 Before doing anything, run all the code in the sript named "initialize.R". This sets up everything you'll need.
 
-2. GET THE COUNTRY LIST:
+2. VIEW THE COUNTRY LIST:
 To view all the availiable countries, just run the command "show_availiable_countries", which takes no parameters.
 
-3. FIT A COUNTRY'S DATA:
-Execute the command "fit_contagion_model". This function takes 1 mandatory parameter, the country name, and 3 optional parameters: "predict_until", "start" and "end". The country name must be identical to the one in the country list, so looking at it first is recommended. See the examples for more information on the optional parameters.
+3. VIEW THE DATA OF A COUNTRY:
+To view the current dataset of a country, run the commmand "show_data_from_country" with the country name as parameter.
 
+4. FIT A COUNTRY'S DATA:
+Execute the command "fit_contagion_model". This function takes 1 mandatory parameter, the country name, and 3 optional parameters: "predict_until", "start" and "end". The country name must be identical to the one in the country list, so looking at it first is recommended. See the examples for more information on the optional parameters.
 
 
 USE EXAMPLES:
@@ -34,5 +36,8 @@ Example 4. Your Italy fittings doesn't seem to behave well. You take a look at t
 
 Example 5. You want to study the model's prediction power by comparing it to the real data. In order to do that, you need to estimate with just a subset of the dataset, for example, from Day 31 up to Day 65. The command you need is
 >fit_contagion_model("Italy", start=31, end=65)
+
+Example 6. You want to observe the dataset of Argentina. You need to execute
+>show_data_from_country("Argentina")
 
 Please take into account that only the country parameter is mandatory; about the optional parameters, you can use any of them by itself, all of them or none.
