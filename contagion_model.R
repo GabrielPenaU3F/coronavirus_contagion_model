@@ -17,16 +17,13 @@ fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1) {
   
   nlm_fit <- obtain_nlm_fit(subset_xy_points)
   coefs <- coef(nlm_fit)
-  predicted_y <- predict(nlm_fit, newdata = data.frame(x = 0:prediction_limit))
+  predicted_values <- predict(nlm_fit, newdata = data.frame(x = 0:prediction_limit))
   
-  
-  title <- paste("Total cases in", country,sep=" ", collapse=NULL)
-  plot(Y ~ x, data=dataset_xy_points, 
-       type='l', main=title, xlab="t (Days)", ylab="Nº of cases", 
-       xlim=c(0, determine_plot_x_lim(prediction_limit, end)), ylim=c(0, determine_plot_y_lim(requested_subset, predicted_y))
-       )
-  lines(0:determine_plot_x_lim(prediction_limit, end), predicted_y, col='red')
-  legend("topleft", c("Observed cases", "Model prediction"), fill=c("black", "red"))
+  x_limit <- prediction_limit
+  y_limit <- determine_plot_y_lim(requested_subset, predicted_values)
+  create_dataset_plot(dataset_xy_points, country, x_limit, y_limit) 
+  add_prediction_plot(x_limit, predicted_values)
+  add_plot_legend()
 }
 
 obtain_nlm_fit <- function(country_dataset){
