@@ -1,11 +1,11 @@
 library(minpack.lm)
 
 
-fit_contagion_model <- function(country, predict_until=end, start=1, end=-1) {
+fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1) {
   
-  if (end == -1){
-    end = get_country_dataset_length(country)
-  }
+  
+  end <- determine_subset_end(country, end)
+  prediction_limit <- determine_prediction_limit(predict_until, end)
 
   country_real_data <- get_data_from_country(country)
   len_dataset <- length(country_real_data)
@@ -17,15 +17,15 @@ fit_contagion_model <- function(country, predict_until=end, start=1, end=-1) {
   
   nlm_fit <- obtain_nlm_fit(subset_xy_points)
   coefs <- coef(nlm_fit)
-  predicted_y <- predict(nlm_fit, newdata = data.frame(x = 0:predict_until))
+  predicted_y <- predict(nlm_fit, newdata = data.frame(x = 0:prediction_limit))
   
   
   title <- paste("Total cases in", country,sep=" ", collapse=NULL)
   plot(Y ~ x, data=dataset_xy_points, 
        type='l', main=title, xlab="t (Days)", ylab="Nº of cases", 
-       xlim=c(0, predict_until), ylim=c(0, determine_plot_y_lim(requested_subset, predicted_y))
+       xlim=c(0, determine_plot_x_lim(prediction_limit, end)), ylim=c(0, determine_plot_y_lim(requested_subset, predicted_y))
        )
-  lines(0:predict_until, predicted_y, col='red')
+  lines(0:determine_plot_x_lim(prediction_limit, end), predicted_y, col='red')
   legend("topleft", c("Observed cases", "Model prediction"), fill=c("black", "red"))
 }
 

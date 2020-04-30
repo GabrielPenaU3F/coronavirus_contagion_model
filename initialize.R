@@ -2,6 +2,7 @@ source("data_io.R")
 source("contagion_model.R")
 source("data_selection.R")
 source("plots.R")
+source("optional_arguments_management.R")
 
 if (!data_is_in_workspace()) {
   data_url = "https://covid.ourworldindata.org/data/ecdc/total_cases.csv"
