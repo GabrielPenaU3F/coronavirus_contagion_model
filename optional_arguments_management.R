@@ -1,6 +1,6 @@
 determine_subset_end <- function(country, end_argument){
   if (end_argument == -1){
-    end_argument = get_country_dataset_length(country)
+    end_argument <- get_country_dataset_length(country)
   }
   end_argument
 }
@@ -15,4 +15,9 @@ determine_prediction_limit <- function(predict_until_argument, end){
     prediction_limit <- predict_until_argument
   }
   prediction_limit
+}
+
+determine_subset_start <- function(country, start){
+  first_nonzero_day <- find_first_nonzero_day_in_country_data(country) 
+  subset_start <- max(first_nonzero_day, start)
 }

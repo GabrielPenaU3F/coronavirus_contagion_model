@@ -12,3 +12,8 @@ get_data_from_country <- function(country){
 get_country_dataset_length <- function(country){
   length <- length(total_cases_dataset[[country]])
 }
+
+find_first_nonzero_day_in_country_data <- function(country){
+  data <- as.vector(get_data_from_country(country))
+  first_nonzero_day <- min(which(data > 0))
+}

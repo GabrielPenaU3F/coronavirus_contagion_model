@@ -4,6 +4,7 @@ library(minpack.lm)
 fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1) {
   
   
+  start <- determine_subset_start(country, start)
   end <- determine_subset_end(country, end)
   prediction_limit <- determine_prediction_limit(predict_until, end)
 
