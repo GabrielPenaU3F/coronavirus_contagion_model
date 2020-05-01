@@ -2,18 +2,19 @@ library(minpack.lm)
 
 
 fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1) {
-  
-  
-  start <- determine_subset_start(country, start)
-  end <- determine_subset_end(country, end)
-  prediction_limit <- determine_prediction_limit(predict_until, end)
 
   country_real_data <- get_data_from_country(country)
-  len_dataset <- length(country_real_data)
-  requested_subset <- country_real_data[start:end]
+  country_fittable_data <- format_data_for_fitting(country_real_data)
+  len_dataset <- length(country_fittable_data)
+  
+  start <- determine_subset_start(start)
+  end <- determine_subset_end(country_fittable_data, end)
+  prediction_limit <- determine_prediction_limit(predict_until, end)
+  
+  requested_subset <- country_fittable_data[start:end]
   len_subset <- length(requested_subset)
   
-  dataset_xy_points<- list("M" = len_dataset, "x" = c(1:len_dataset),"Y" = country_real_data)
+  dataset_xy_points<- list("M" = len_dataset, "x" = c(1:len_dataset),"Y" = country_fittable_data)
   subset_xy_points <- list("M" = len_subset, "x" = c(start:end),"Y" = requested_subset)
   
   nlm_fit <- obtain_nlm_fit(subset_xy_points)

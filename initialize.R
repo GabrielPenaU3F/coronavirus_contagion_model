@@ -4,8 +4,9 @@ source("data_selection.R")
 source("plots.R")
 source("optional_arguments_management.R")
 source("displayer.R")
+source("data_manipulation.R")
 
 if (!data_is_in_workspace()) {
   data_url = "https://covid.ourworldindata.org/data/ecdc/total_cases.csv"
-  total_cases_dataset = read_csv_data(data_url)
+  total_cases_dataset <- read_csv_data(data_url)
 }
