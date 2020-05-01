@@ -32,5 +32,7 @@ fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1) {
 }
 
 obtain_nlm_fit <- function(country_dataset){
-  nlm <- nlsLM(Y ~ ((1 + a * x)^b - 1)/b, data=country_dataset, start=list(a=0.1, b=1))
+  nlm <- nlsLM(Y ~ ((1 + a * x)^b - 1)/b, 
+               data=country_dataset, start=list(a=0.1, b=1), 
+               control=nls.lm.control(maxiter=150))
 }
