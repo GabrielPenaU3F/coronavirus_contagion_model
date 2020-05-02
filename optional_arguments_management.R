@@ -1,8 +1,8 @@
-determine_subset_end <- function(subset_vector, end_argument){
+determine_subset_end <- function(dataset_vector, end_argument){
   if (end_argument == -1){
-    end_argument <- length(subset_vector)
-  }
-  end_argument
+    end_argument <- length(dataset_vector)
+  } 
+  end <- min(end_argument, length(dataset_vector))
 }
 
 determine_prediction_limit <- function(predict_until_argument, end){
