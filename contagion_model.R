@@ -22,13 +22,14 @@ fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1) {
   predicted_values <- predict(nlm_fit, newdata = data.frame(x = 1:prediction_limit))
   
   display_estimated_coefficients(coefs)
-  display_fit_statistics(requested_subset, predicted_values[start:end])
+  display_fit_statistics(requested_subset, predicted_values)
   display_end_of_printing()
   
-  x_limit <- prediction_limit
+  prediction_x_limit <- prediction_limit
+  visual_x_limit <- determine_plot_x_lim(prediction_limit, length(country_fittable_data))
   y_limit <- determine_plot_y_lim(requested_subset, predicted_values)
-  create_dataset_plot(dataset_xy_points, country, x_limit, y_limit) 
-  add_prediction_plot(x_limit, predicted_values)
+  create_dataset_plot(dataset_xy_points, country, visual_x_limit, y_limit) 
+  add_prediction_plot(prediction_x_limit, predicted_values)
   add_plot_legend()
   
 }

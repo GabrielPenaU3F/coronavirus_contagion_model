@@ -2,8 +2,8 @@ determine_plot_y_lim <- function(requested_subset, predicted_y){
   y_lim <- max(c(max(requested_subset),max(predicted_y)))
 }
 
-determine_plot_x_lim <- function(prediction_limit, end){
-  x_lim <- max(prediction_limit, end)
+determine_plot_x_lim <- function(prediction_limit, dataset_length){
+  x_lim <- max(prediction_limit, dataset_length)
 }
 
 create_dataset_plot <- function(xy_points, country, x_limit, y_limit) {
@@ -14,8 +14,8 @@ create_dataset_plot <- function(xy_points, country, x_limit, y_limit) {
   )
 }
 
-add_prediction_plot <- function(x_limit, predicted_values){
-  lines(1:x_limit, predicted_values, col='red')
+add_prediction_plot <- function(prediction_x_limit, predicted_values){
+  lines(1:prediction_x_limit, predicted_values, col='red')
 }
 
 add_plot_legend <- function(){
