@@ -15,7 +15,7 @@ create_dataset_plot <- function(xy_points, country, x_limit, y_limit) {
 }
 
 add_prediction_plot <- function(x_limit, predicted_values){
-  lines(0:x_limit, predicted_values, col='red')
+  lines(1:x_limit, predicted_values, col='red')
 }
 
 add_plot_legend <- function(){

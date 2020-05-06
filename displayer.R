@@ -5,5 +5,15 @@ display_estimated_coefficients <- function(coefs){
   cat("Coefficients: \n\n")
   cat(paste(intToUtf8(961), " = ", rho, "\n", sep="", collapse=NULL))
   cat(paste(intToUtf8(947), "/", intToUtf8(961), " = ", gamma_over_rho, "\n", sep="", collapse=NULL))
+}
+
+display_fit_statistics <- function(real_values, predicted_values){
+  rsquared <- calculate_determination_coefficient(real_values, predicted_values)
+  cat("\n--------------------\n\n")
+  cat("Goodness of fit statistics: \n\n")
+  cat(paste("R2 determination coefficient: "), rsquared, "\n")
+}
+
+display_end_of_printing <- function(){
   cat("\n--------------------\n\n")
 }

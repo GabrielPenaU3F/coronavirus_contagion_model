@@ -19,9 +19,11 @@ fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1) {
   
   nlm_fit <- obtain_nlm_fit(subset_xy_points)
   coefs <- coef(nlm_fit)
-  predicted_values <- predict(nlm_fit, newdata = data.frame(x = 0:prediction_limit))
+  predicted_values <- predict(nlm_fit, newdata = data.frame(x = 1:prediction_limit))
   
   display_estimated_coefficients(coefs)
+  display_fit_statistics(requested_subset, predicted_values[start:end])
+  display_end_of_printing()
   
   x_limit <- prediction_limit
   y_limit <- determine_plot_y_lim(requested_subset, predicted_values)

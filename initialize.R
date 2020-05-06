@@ -5,6 +5,7 @@ source("plots.R")
 source("optional_arguments_management.R")
 source("displayer.R")
 source("data_manipulation.R")
+source("goodness_of_fit.R")
 
 if (!data_is_in_workspace()) {
   data_url = "https://covid.ourworldindata.org/data/ecdc/total_cases.csv"
