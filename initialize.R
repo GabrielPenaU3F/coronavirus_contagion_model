@@ -7,5 +7,4 @@ source("displayer.R")
 source("data_manipulation.R")
 source("goodness_of_fit.R")
 
-data_url = "https://covid.ourworldindata.org/data/ecdc/total_cases.csv"
-total_cases_dataset <- read_csv_data(data_url)
+total_cases_dataset <- update_data()
