@@ -39,3 +39,35 @@ obtain_nlm_fit <- function(country_dataset){
                data=country_dataset, start=list(a=0.1, b=1), 
                control=nls.lm.control(maxiter=150))
 }
+
+analyze_model_parameters_over_time <-function(country, start_from=30, by=5){
+  
+  country_real_data <- get_data_from_country(country)
+  country_fittable_data <- format_data_for_fitting(country_real_data)
+  data_length = length(country_fittable_data)
+  
+  a_params <- vector()
+  b_params <- vector()
+  index = start_from
+  while (index < data_length) {
+    
+    coefs <- determine_coefficients_until(country_fittable_data, index)
+    a_params <- c(a_params, coefs[1])
+    b_params <- c(b_params, coefs[2])
+    index <- index + by
+    
+  }
+  
+  coefs_full_dataset <- determine_coefficients_until(country_fittable_data, data_length)
+  a_params <- c(a_params, coefs_full_dataset[1])
+  b_params <- c(b_params, coefs_full_dataset[2])
+  
+  plot_parameters_over_time(country, a_params, b_params, start_from, data_length, by)
+  
+}
+
+determine_coefficients_until <- function(fittable_data, end){
+  subset_xy_points<- list("x" = c(1:end),"Y" = fittable_data[1:end])
+  nlm_fit <- obtain_nlm_fit(subset_xy_points)
+  coefs <- coef(nlm_fit)
+}

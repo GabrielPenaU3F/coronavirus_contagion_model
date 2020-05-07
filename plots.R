@@ -21,3 +21,22 @@ add_prediction_plot <- function(prediction_x_limit, predicted_values){
 add_plot_legend <- function(){
   legend("topleft", c("Observed cases", "Model prediction"), fill=c("black", "red"))
 }
+
+plot_parameters_over_time <- function(country, a_params, b_params, start, end, by) {
+  par(mfrow=c(1,2))
+  plot_param_over_time(a_params, start, end, by, intToUtf8(961), 'blue')
+  plot_param_over_time(b_params, start, end, by, paste(intToUtf8(947), "/", intToUtf8(961)), 'red')
+  mtext(paste("Model parameters over time, data from ", country), outer=TRUE, cex=1.5, line=-2)
+}
+
+plot_param_over_time <- function(params, start, end, by, param_name, color) {
+  x_sequence <- c(seq.int(start, end, by))
+  if ((start - end)  %% by > 0) {
+    x_sequence <- c(x_sequence, end)
+  }
+  xy_points <- list("x" = x_sequence,"Y" = params)
+  plot(Y ~ x, data=xy_points, 
+       type='o', xlab="t (Days)", ylab=paste(param_name,"(t)"), 
+       xlim=c(0, end), ylim=c(0, max(Y)), col=color
+  )
+}
