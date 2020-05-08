@@ -9,3 +9,7 @@ format_data_for_fitting <- function(data_vector){
 remove_nas <- function(data_vector){
   data <- as.vector(na.locf(data_vector))
 }
+
+format_country_name <- function(country_id){
+  name <- gsub("[.]", " ", country_id)
+}
