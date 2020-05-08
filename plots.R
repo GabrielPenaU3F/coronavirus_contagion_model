@@ -36,7 +36,7 @@ plot_param_over_time <- function(params, start, end, by, param_name, color) {
   }
   xy_points <- list("x" = x_sequence,"Y" = params)
   plot(Y ~ x, data=xy_points, 
-       type='o', xlab="t (Days)", ylab=paste(param_name,"(t)"), 
+       type='l', xlab="t (Days)", ylab=paste(param_name,"(t)"), 
        xlim=c(0, end), ylim=c(0, max(Y)), col=color
   )
 }
