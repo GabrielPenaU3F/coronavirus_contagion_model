@@ -48,19 +48,15 @@ analyze_model_parameters_over_time <-function(country, start_from=30, by=5){
   
   a_params <- vector()
   b_params <- vector()
-  index = start_from
-  while (index < data_length) {
-    
+  t_sequence <- seq(start_from, data_length, by)
+  if (!(data_length %in% t_sequence)){
+    t_sequence <- c(t_sequence, data_length)
+  }
+  for (index in t_sequence) {
     coefs <- determine_coefficients_until(country_fittable_data, index)
     a_params <- c(a_params, coefs[1])
     b_params <- c(b_params, coefs[2])
-    index <- index + by
-    
   }
-  
-  coefs_full_dataset <- determine_coefficients_until(country_fittable_data, data_length)
-  a_params <- c(a_params, coefs_full_dataset[1])
-  b_params <- c(b_params, coefs_full_dataset[2])
   
   plot_parameters_over_time(country, a_params, b_params, start_from, data_length, by)
   
