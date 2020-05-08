@@ -48,17 +48,22 @@ analyze_model_parameters_over_time <-function(country, start_from=30, by=1){
   
   a_params <- vector()
   b_params <- vector()
+  mtbis <- vector()
   t_sequence <- seq(start_from, data_length, by)
   if (!(data_length %in% t_sequence)){
     t_sequence <- c(t_sequence, data_length)
   }
   for (index in t_sequence) {
     coefs <- determine_coefficients_until(country_fittable_data, index)
-    a_params <- c(a_params, coefs[1])
-    b_params <- c(b_params, coefs[2])
+    a <- coefs[1]
+    b <- coefs[2]
+    mtbi <- calculate_estimated_mtbi(a, b, index)
+    a_params <- c(a_params, a)
+    b_params <- c(b_params, b)
+    mtbis <- c(mtbis, mtbi)
   }
   
-  plot_parameters_over_time(country, a_params, b_params, start_from, data_length, by)
+  plot_parameters_over_time(country, a_params, b_params, mtbis, start_from, data_length, by)
   
 }
 
@@ -66,4 +71,9 @@ determine_coefficients_until <- function(fittable_data, end){
   subset_xy_points<- list("x" = c(1:end),"Y" = fittable_data[1:end])
   nlm_fit <- obtain_nlm_fit(subset_xy_points)
   coefs <- coef(nlm_fit)
+}
+
+calculate_estimated_mtbi <- function(a, b, day){
+  parenthesis = 1 + a * day
+  mtbi <- parenthesis / (a * (parenthesis^b - 1))
 }
