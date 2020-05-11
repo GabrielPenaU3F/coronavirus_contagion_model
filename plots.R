@@ -23,11 +23,10 @@ add_plot_legend <- function(){
   legend("topleft", c("Observed cases", "Model prediction"), fill=c("black", "red"))
 }
 
-plot_parameters_over_time <- function(country, a_params, b_params, mtbis, start, end, by) {
-  par(mfrow=c(1,3))
+plot_parameters_over_time <- function(country, a_params, b_params, start, end, by) {
+  par(mfrow=c(1,2))
   plot_param_over_time(a_params, start, end, by, intToUtf8(961), 'blue')
   plot_param_over_time(b_params, start, end, by, paste(intToUtf8(947), "/", intToUtf8(961)), 'red')
-  plot_param_over_time(mtbis, start, end, by, "Mean time between infections", 'green')
   mtext(paste("Model parameters over time, data from", format_country_name(country)), outer=TRUE, cex=1.5, line=-2)
 }
 
@@ -42,3 +41,9 @@ plot_param_over_time <- function(params, start, end, by, param_name, color) {
        xlim=c(0, end), ylim=c(0, max(Y)), col=color
   )
 }
+  
+plot_mbti <- function(country, mtbis, start, end, by){
+  par(mfrow=c(1,1))
+  plot_param_over_time(mtbis, start, end, by, "Mean time between infections", 'green')
+}
+  

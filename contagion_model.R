@@ -48,6 +48,28 @@ analyze_model_parameters_over_time <-function(country, start_from=30, by=1, end=
   
   a_params <- vector()
   b_params <- vector()
+  t_sequence <- seq(start_from, end, by)
+  if (!(end %in% t_sequence)){
+    t_sequence <- c(t_sequence, end)
+  }
+  for (index in t_sequence) {
+    coefs <- determine_coefficients_until(country_fittable_data, index)
+    a <- coefs[1]
+    b <- coefs[2]
+    a_params <- c(a_params, a)
+    b_params <- c(b_params, b)
+  }
+  
+  plot_parameters_over_time(country, a_params, b_params, start_from, end, by)
+  
+}
+
+calculate_mtbi <- function(country, start_from=30, by=1, end=-1){
+  
+  country_real_data <- get_data_from_country(country)
+  country_fittable_data <- format_data_for_fitting(country_real_data)
+  end <- determine_subset_end(country_fittable_data, end)
+
   mtbis <- vector()
   t_sequence <- seq(start_from, end, by)
   if (!(end %in% t_sequence)){
@@ -58,14 +80,13 @@ analyze_model_parameters_over_time <-function(country, start_from=30, by=1, end=
     a <- coefs[1]
     b <- coefs[2]
     mtbi <- calculate_estimated_mtbi(a, b, index)
-    a_params <- c(a_params, a)
-    b_params <- c(b_params, b)
     mtbis <- c(mtbis, mtbi)
   }
   
-  plot_parameters_over_time(country, a_params, b_params, mtbis, start_from, end, by)
+  plot_mbti(country, mtbis, start_from, end, by)
   
 }
+
 
 determine_coefficients_until <- function(fittable_data, end){
   subset_xy_points<- list("x" = c(1:end),"Y" = fittable_data[1:end])
