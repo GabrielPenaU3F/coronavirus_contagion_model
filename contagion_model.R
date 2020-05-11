@@ -40,18 +40,18 @@ obtain_nlm_fit <- function(country_dataset){
                control=nls.lm.control(maxiter=150))
 }
 
-analyze_model_parameters_over_time <-function(country, start_from=30, by=1){
+analyze_model_parameters_over_time <-function(country, start_from=30, by=1, end=-1){
   
   country_real_data <- get_data_from_country(country)
   country_fittable_data <- format_data_for_fitting(country_real_data)
-  data_length = length(country_fittable_data)
+  end <- determine_subset_end(country_fittable_data, end)
   
   a_params <- vector()
   b_params <- vector()
   mtbis <- vector()
-  t_sequence <- seq(start_from, data_length, by)
-  if (!(data_length %in% t_sequence)){
-    t_sequence <- c(t_sequence, data_length)
+  t_sequence <- seq(start_from, end, by)
+  if (!(end %in% t_sequence)){
+    t_sequence <- c(t_sequence, end)
   }
   for (index in t_sequence) {
     coefs <- determine_coefficients_until(country_fittable_data, index)
@@ -63,7 +63,7 @@ analyze_model_parameters_over_time <-function(country, start_from=30, by=1){
     mtbis <- c(mtbis, mtbi)
   }
   
-  plot_parameters_over_time(country, a_params, b_params, mtbis, start_from, data_length, by)
+  plot_parameters_over_time(country, a_params, b_params, mtbis, start_from, end, by)
   
 }
 
