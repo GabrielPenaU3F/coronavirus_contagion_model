@@ -85,24 +85,10 @@ calculate_mtbi <- function(country, start_from=30, by=1, end=-1, save=-1){
   
   plot_mbti(country, mtbis, start_from, end, by)
   
-  if (save == 'workspace'){
-    mtbi_data <- data.frame(
-      day <- t_sequence,
-      mtbi <- mtbis
-    )
-    colnames(mtbi_data) <- c('day', 'mtbi')
-    mtbi_data <<- mtbi_data
-  } else if (save == 'csv'){
-    mtbi_data <- data.frame(
-      day <- t_sequence,
-      mtbi <- mtbis
-    )
-    colnames(mtbi_data) <- c('Day', 'MTBI')
-    filename = paste("mtbi_", country, sep='')
-    save_data_to_csv(mtbi_data, filename)
+  if (save != -1){
+    save_mtbi(save, country, t_sequence, mtbis)
   }
 }
-
 
 determine_coefficients_until <- function(fittable_data, end){
   subset_xy_points<- list("x" = c(1:end),"Y" = fittable_data[1:end])

@@ -13,3 +13,12 @@ remove_nas <- function(data_vector){
 format_country_name <- function(country_id){
   name <- gsub("[.]", " ", country_id)
 }
+
+create_mtbi_dataframe <- function(days, mtbis){
+  mtbi_data <- data.frame(
+    day <- days,
+    mtbi <- mtbis
+  )
+  colnames(mtbi_data) <- c('day', 'mtbi')
+  mtbi_data
+}

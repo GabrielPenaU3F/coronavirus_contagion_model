@@ -7,7 +7,6 @@ read_csv_data <- function(url) {
   csv <- read.csv(url(url))
 }
 
-
 save_data_to_csv <- function(data, filename){
   filename <- paste(filename, '.csv', sep='')
   write.csv(data, filename)
@@ -23,4 +22,15 @@ change_data_source_url <- function(url){
 
 reset_data_source_to_default <- function(){
   current_data_source <- default_data_source
+}
+
+save_mtbi <- function(save, country, days, mtbis){
+  mtbi_data <- create_mtbi_dataframe(days, mtbis)
+  if (save == 'workspace'){
+    varname <- paste("mtbi_", country, sep = "")
+    assign(varname, mtbi_data, inherits=TRUE)
+  } else if (save == 'csv'){
+    filename = paste("mtbi_", country, sep='')
+    save_data_to_csv(mtbi_data, filename)
+  }
 }
