@@ -15,3 +15,11 @@ save_csv_data <- function(data) {
 update_data <- function(){
   read_csv_data(current_data_source)
 }
+
+change_data_source_url <- function(url){
+  current_data_source <- url
+}
+
+reset_data_source_to_default <- function(){
+  current_data_source <- default_data_source
+}
