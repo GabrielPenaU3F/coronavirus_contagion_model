@@ -9,10 +9,14 @@ get_data_from_country <- function(country){
   data <- as.vector(total_cases_dataset[[country]])
 }
 
-get_country_dataset_length <- function(country){
-  length <- length(total_cases_dataset[[country]])
+get_deaths_from_country <-function(country){
+  data <- as.vector(total_deaths_dataset[[country]])
 }
 
 show_data_from_country <- function(country){
   print(get_data_from_country(country))
+}
+
+show_deaths_from_country <- function(country){
+  print(get_deaths_from_country(country))
 }

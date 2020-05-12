@@ -7,4 +7,4 @@ source("displayer.R")
 source("data_manipulation.R")
 source("goodness_of_fit.R")
 
-total_cases_dataset <- update_data()
+update_data()

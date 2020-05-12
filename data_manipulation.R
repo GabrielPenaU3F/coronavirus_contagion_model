@@ -14,6 +14,16 @@ format_country_name <- function(country_id){
   name <- gsub("[.]", " ", country_id)
 }
 
+format_dataset_name <- function(dataset_id){
+  name_lowercase <- gsub("[_]", " ", dataset_id)
+  name <- paste(toupper(substring(name_lowercase, 1,1)), substring(name_lowercase, 2), sep="", collapse=NULL)
+  name
+}
+
+format_main_plot_ylabel <- function(dataset){
+  ylabel <- paste('Number of ', gsub(paste0('total_',collapse = "|"),"", dataset))
+}
+
 create_mtbi_dataframe <- function(days, mtbis){
   mtbi_data <- data.frame(
     day <- days,

@@ -1,9 +1,13 @@
 library(minpack.lm)
 
 
-fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1) {
+fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1, dataset='total_cases') {
 
-  country_real_data <- get_data_from_country(country)
+  if (dataset == 'total_cases') {
+    country_real_data <- get_data_from_country(country)
+  } else if (dataset == 'total_deaths') {
+    country_real_data <- get_deaths_from_country(country)
+  }
   country_fittable_data <- format_data_for_fitting(country_real_data)
   len_dataset <- length(country_fittable_data)
   
@@ -21,6 +25,7 @@ fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1) {
   coefs <- coef(nlm_fit)
   predicted_values <- predict(nlm_fit, newdata = data.frame(x = 1:prediction_limit))
   
+  display_title(dataset, country)
   display_estimated_coefficients(coefs)
   display_fit_statistics(requested_subset, predicted_values[start:length(predicted_values)])
   display_end_of_printing()
@@ -28,7 +33,7 @@ fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1) {
   prediction_x_limit <- prediction_limit
   visual_x_limit <- determine_plot_x_lim(prediction_limit, length(country_fittable_data))
   y_limit <- determine_plot_y_lim(requested_subset, predicted_values)
-  create_dataset_plot(dataset_xy_points, country, visual_x_limit, y_limit) 
+  create_dataset_plot(dataset_xy_points, country, dataset, visual_x_limit, y_limit) 
   add_prediction_plot(prediction_x_limit, predicted_values)
   add_plot_legend()
   
@@ -89,6 +94,7 @@ calculate_mtbi <- function(country, start_from=30, by=1, end=-1, save=-1){
     save_mtbi(save, country, t_sequence, mtbis)
   }
 }
+
 
 determine_coefficients_until <- function(fittable_data, end){
   subset_xy_points<- list("x" = c(1:end),"Y" = fittable_data[1:end])

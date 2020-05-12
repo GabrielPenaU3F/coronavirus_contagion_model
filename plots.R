@@ -6,11 +6,11 @@ determine_plot_x_lim <- function(prediction_limit, dataset_length){
   x_lim <- max(prediction_limit, dataset_length)
 }
 
-create_dataset_plot <- function(xy_points, country, x_limit, y_limit) {
-  title <- paste("Total cases in", format_country_name(country), sep=" ", collapse=NULL)
+create_dataset_plot <- function(xy_points, country, dataset, x_limit, y_limit) {
+  title <- paste(format_dataset_name(dataset)," in ", format_country_name(country), sep="", collapse=NULL)
   par(mfrow=c(1,1))
   plot(Y ~ x, data=xy_points, 
-       type='l', main=title, xlab="t (Days)", ylab="Number of cases", 
+       type='l', main=title, xlab="t (Days)", ylab=format_main_plot_ylabel(dataset), 
        xlim=c(0, x_limit), ylim=c(0, y_limit)
   )
 }
