@@ -14,7 +14,13 @@ To view all the availiable countries, just run the command "show_availiable_coun
 To view the current dataset of a country, run the commmand "show_data_from_country" with the country name as parameter.
 
 4. FIT A COUNTRY'S DATA:
-Execute the command "fit_contagion_model". This function takes 1 mandatory parameter, the country name, and 3 optional parameters: "predict_until", "start" and "end". The country name must be identical to the one in the country list, so looking at it first is recommended. See the examples for more information on the optional parameters.
+Execute the command "fit_contagion_model". This function takes 1 mandatory parameter, the country name, and 3 optional parameters: "predict_until", "start" and "end". The country name must be identical to the one in the country list, so looking at it first is recommended. Please take into account that only the country parameter is mandatory; about the optional parameters, you can use any of them by itself, all of them or none. See the examples 3-5 for more information on the optional parameters. 
+
+5. ANALYZE THE MODEL PARAMETERS VARIATON OVER THE DATASET
+Execute the command "analyze_model_parameters_over_time". This function takes 1 mandatory parameter, the country name, and 3 optional parameters: "start_from", "by" and "end". This function performs the model fit using different subsets of the data, each of them begginning in day 1 and ending in specified times. The "start_from" parameter, which is 30 by default, means "the ending day of the first subset to be evaluated". For some datasets, like the United States one, the fit may not converge on the default mode, so you can customize it into starting later by modifying that parameter. The "by" argument, which is 1 by default, specifies how often are subsets evaluated; the 1 default value means that every possible subset will be fitted. For higher values, the shown curves are interpolated. See the examples 8-10 for more information on the optional parameters.
+
+6. VIEW THE MEAN TIME BETWEEN INFECTIONS
+Execute the command "calculate_mtbi". This function takes 1 mandatory parameter, the country name, and 3 optional parameters, which are exactly the same as in the previous feature. See the examples 8-10 for more information on the optional parameters.
 
 
 USE EXAMPLES:
@@ -40,4 +46,17 @@ Example 5. You want to study the model's prediction power by comparing it to the
 Example 6. You want to observe the dataset of Argentina. You need to execute
 >show_data_from_country("Argentina")
 
-Please take into account that only the country parameter is mandatory; about the optional parameters, you can use any of them by itself, all of them or none.
+Example 7. You want to study the variation of the parameters over time in the Spain dataset. You need to execute
+>analyze_model_parameters_over_time("Spain")
+
+Example 8. You want to study the variation of the parameters over time in the Spain dataset, but only until the 60th day. You need to execute
+>analyze_model_parameters_over_time("Spain", end=60)
+
+Example 9. You want to study the variation of the parameters over time in the Spain dataset, beginning the analysis the 45th day. You need to execute
+>analyze_model_parameters_over_time("Spain", start_from=45)
+
+Example 10. You want to study the variation of the parameters over time in the Spain dataset, beginning the analysis the 45th day, but your computer is slow and the calculations take too long. This can be solved by evaluating only certain datasets instead of every possible one, and then interpolating the samples. You choose to fit the datasets every 5 days; the command you need is 
+>analyze_model_parameters_over_time("Spain", start_from=45, by=5)
+
+Example 11. You want to see the mean time between infections on the brazilian dataset, beginning the analysis on day 40 up to day 80. The command you need is
+>calculate_mtbi("Brazil", start_from=40, end=80)
