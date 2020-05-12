@@ -64,7 +64,7 @@ analyze_model_parameters_over_time <-function(country, start_from=30, by=1, end=
   
 }
 
-calculate_mtbi <- function(country, start_from=30, by=1, end=-1){
+calculate_mtbi <- function(country, start_from=30, by=1, end=-1, save){
   
   country_real_data <- get_data_from_country(country)
   country_fittable_data <- format_data_for_fitting(country_real_data)
@@ -85,6 +85,22 @@ calculate_mtbi <- function(country, start_from=30, by=1, end=-1){
   
   plot_mbti(country, mtbis, start_from, end, by)
   
+  if (save == 'workspace'){
+    mtbi_data <- data.frame(
+      day <- t_sequence,
+      mtbi <- mtbis
+    )
+    colnames(mtbi_data) <- c('day', 'mtbi')
+    mtbi_data <<- mtbi_data
+  } else if (save == 'csv'){
+    mtbi_data <- data.frame(
+      day <- t_sequence,
+      mtbi <- mtbis
+    )
+    colnames(mtbi_data) <- c('Day', 'MTBI')
+    filename = paste("mtbi_", country, sep='')
+    save_data_to_csv(mtbi_data, filename)
+  }
 }
 
 

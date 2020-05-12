@@ -1,6 +1,6 @@
 library(RCurl)
 
-default_data_source <- "https://covid.ourworldindata.org/data/ecdc/total_cases.csv"
+default_data_source <- 'https://covid.ourworldindata.org/data/ecdc/total_cases.csv'
 current_data_source <- default_data_source
 
 read_csv_data <- function(url) {
@@ -8,8 +8,9 @@ read_csv_data <- function(url) {
 }
 
 
-save_csv_data <- function(data) {
-  write.csv(data)
+save_data_to_csv <- function(data, filename){
+  filename <- paste(filename, '.csv', sep='')
+  write.csv(data, filename)
 }
 
 update_data <- function(){
