@@ -64,7 +64,7 @@ analyze_model_parameters_over_time <-function(country, start_from=30, by=1, end=
   
 }
 
-calculate_mtbi <- function(country, start_from=30, by=1, end=-1, save){
+calculate_mtbi <- function(country, start_from=30, by=1, end=-1, save=-1){
   
   country_real_data <- get_data_from_country(country)
   country_fittable_data <- format_data_for_fitting(country_real_data)

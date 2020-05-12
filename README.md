@@ -20,7 +20,18 @@ Execute the command "fit_contagion_model". This function takes 1 mandatory param
 Execute the command "analyze_model_parameters_over_time". This function takes 1 mandatory parameter, the country name, and 3 optional parameters: "start_from", "by" and "end". This function performs the model fit using different subsets of the data, each of them begginning in day 1 and ending in specified times. The "start_from" parameter, which is 30 by default, means "the ending day of the first subset to be evaluated". For some datasets, like the United States one, the fit may not converge on the default mode, so you can customize it into starting later by modifying that parameter. The "by" argument, which is 1 by default, specifies how often are subsets evaluated; the 1 default value means that every possible subset will be fitted. For higher values, the shown curves are interpolated. See the examples 8-10 for more information on the optional parameters.
 
 6. VIEW THE MEAN TIME BETWEEN INFECTIONS
-Execute the command "calculate_mtbi". This function takes 1 mandatory parameter, the country name, and 3 optional parameters, which are exactly the same as in the previous feature. See the examples 8-10 for more information on the optional parameters.
+Execute the command "calculate_mtbi". This function takes 1 mandatory parameter, the country name, and 4 optional parameters. The first three are exactly the same as in the previous feature: "start_from", "end" and "by". The fourth parameter, called "save", allows you to save the MTBI estimation to a data frame in your workspace or a CSV file. See the examples 11-13, and review the examples 8-10, for more information on the optional parameters.
+
+MISCELLANEOUS
+
+a) CHANGING DATA SOURCE URL
+If you have another data source, different than the Our World In Data website, you can retrieve data from it. However, you have to be sure that the data format is identical as the one we used. The command to select another data source is
+>change_data_source_url('http://your_url')
+
+b) RESET THE DATA SOURCE TO DEFAULT
+You can get back to the default data source everytime you want. Just execute
+>reset_data_source_to_default()
+
 
 
 USE EXAMPLES:
@@ -58,5 +69,13 @@ Example 9. You want to study the variation of the parameters over time in the Sp
 Example 10. You want to study the variation of the parameters over time in the Spain dataset, beginning the analysis the 45th day, but your computer is slow and the calculations take too long. This can be solved by evaluating only certain datasets instead of every possible one, and then interpolating the samples. You choose to fit the datasets every 5 days; the command you need is 
 >analyze_model_parameters_over_time("Spain", start_from=45, by=5)
 
-Example 11. You want to see the mean time between infections on the brazilian dataset, beginning the analysis on day 40 up to day 80. The command you need is
+Example 11. You want to see the mean time between infections of the brazilian dataset, beginning the analysis on day 40 up to day 80. The command you need is
 >calculate_mtbi("Brazil", start_from=40, end=80)
+
+Example 12. You want to calculate the mean time between infections of the brazilian dataset, taking samples every 2 days, and save it as a data frame on the workspace. You need to execute the command
+>calculate_mtbi("Brazil", by=2, save='workspace')
+
+Example 13. You want to calculate the mean time between infections of the brazilian dataset and save it into a CSV file. You need to execute the command
+>calculate_mtbi("Brazil", save='csv')
+
+You'll find the file on your R workspace, named "mtbi_Brazil.csv".
