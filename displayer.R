@@ -9,8 +9,8 @@ display_estimated_coefficients <- function(coefs){
   gamma_over_rho <- coefs[[2]]
   cat("\n--------------------\n\n")
   cat("Coefficients: \n\n")
-  cat(paste(intToUtf8(961), " = ", rho, "\n", sep="", collapse=NULL))
-  cat(paste(intToUtf8(947), "/", intToUtf8(961), " = ", gamma_over_rho, "\n", sep="", collapse=NULL))
+  cat(paste(intToUtf8(961), " = ", rho, " 1/day \n", sep="", collapse=NULL))
+  cat(paste(intToUtf8(947), "/", intToUtf8(961), " = ", gamma_over_rho, " day \n", sep="", collapse=NULL))
 }
 
 display_fit_statistics <- function(real_values, predicted_values){

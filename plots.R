@@ -10,7 +10,7 @@ create_dataset_plot <- function(xy_points, country, dataset, x_limit, y_limit) {
   title <- paste(format_dataset_name(dataset)," in ", format_country_name(country), sep="", collapse=NULL)
   par(mfrow=c(1,1))
   plot(Y ~ x, data=xy_points, 
-       type='l', main=title, xlab="t (Days)", ylab=format_main_plot_ylabel(dataset), 
+       type='l', main=title, xlab="t (days)", ylab=format_main_plot_ylabel(dataset), 
        xlim=c(0, x_limit), ylim=c(0, y_limit)
   )
 }
@@ -25,25 +25,25 @@ add_plot_legend <- function(){
 
 plot_parameters_over_time <- function(country, a_params, b_params, start, end, by) {
   par(mfrow=c(1,2))
-  plot_param_over_time(a_params, start, end, by, intToUtf8(961), 'blue')
-  plot_param_over_time(b_params, start, end, by, paste(intToUtf8(947), "/", intToUtf8(961)), 'red')
+  plot_param_over_time(a_params, start, end, by, paste(intToUtf8(961), " 1/day", sep=""), 'blue')
+  plot_param_over_time(b_params, start, end, by, paste(intToUtf8(947), "/", intToUtf8(961), " day"), 'red')
   mtext(paste("Model parameters over time, data from", format_country_name(country)), outer=TRUE, cex=1.5, line=-2)
 }
 
-plot_param_over_time <- function(params, start, end, by, param_name, color) {
+plot_param_over_time <- function(params, start, end, by, param_label, color) {
   x_sequence <- c(seq.int(start, end, by))
   if ((start - end)  %% by > 0) {
     x_sequence <- c(x_sequence, end)
   }
   xy_points <- list("x" = x_sequence,"Y" = params)
   plot(Y ~ x, data=xy_points, 
-       type='l', xlab="t (Days)", ylab=paste(param_name,"(t)"), 
+       type='l', xlab="t (days)", ylab=param_label, 
        xlim=c(0, end), ylim=c(0, max(Y)), col=color
   )
 }
   
 plot_mbti <- function(country, mtbis, start, end, by){
   par(mfrow=c(1,1))
-  plot_param_over_time(mtbis, start, end, by, "Mean time between infections", 'green')
+  plot_param_over_time(mtbis, start, end, by, "Mean time between infections (days)", 'green')
 }
   
