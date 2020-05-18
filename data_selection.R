@@ -20,3 +20,12 @@ show_data_from_country <- function(country){
 show_deaths_from_country <- function(country){
   print(get_deaths_from_country(country))
 }
+
+select_dataset <- function(dataset, country){
+  if (dataset == 'total_cases') {
+    country_real_data <- get_data_from_country(country)
+  } else if (dataset == 'total_deaths') {
+    country_real_data <- get_deaths_from_country(country)
+  }
+  country_real_data
+}

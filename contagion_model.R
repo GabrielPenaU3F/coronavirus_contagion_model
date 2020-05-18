@@ -3,11 +3,7 @@ library(minpack.lm)
 
 fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1, dataset='total_cases', save=-1) {
 
-  if (dataset == 'total_cases') {
-    country_real_data <- get_data_from_country(country)
-  } else if (dataset == 'total_deaths') {
-    country_real_data <- get_deaths_from_country(country)
-  }
+  country_real_data <- select_dataset(dataset, country)
   country_fittable_data <- format_data_for_fitting(country_real_data)
   len_dataset <- length(country_fittable_data)
   
@@ -45,9 +41,9 @@ obtain_nlm_fit <- function(country_dataset){
                control=nls.lm.control(maxiter=150))
 }
 
-analyze_model_parameters_over_time <-function(country, start_from=30, by=1, end=-1){
+analyze_model_parameters_over_time <-function(country, start_from=30, by=1, end=-1, save=-1, dataset='total_cases'){
   
-  country_real_data <- get_data_from_country(country)
+  country_real_data <- select_dataset(dataset, country)
   country_fittable_data <- format_data_for_fitting(country_real_data)
   end <- determine_subset_end(country_fittable_data, end)
   
@@ -73,9 +69,9 @@ analyze_model_parameters_over_time <-function(country, start_from=30, by=1, end=
   
 }
 
-calculate_mtbi <- function(country, start_from=30, by=1, end=-1, save=-1){
+calculate_mtbi <- function(country, start_from=30, by=1, end=-1, save=-1, dataset='total_cases'){
   
-  country_real_data <- get_data_from_country(country)
+  country_real_data <- select_dataset(dataset, country)
   country_fittable_data <- format_data_for_fitting(country_real_data)
   end <- determine_subset_end(country_fittable_data, end)
 
