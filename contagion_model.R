@@ -1,7 +1,7 @@
 library(minpack.lm)
 
 
-fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1, dataset='total_cases') {
+fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1, dataset='total_cases', save=-1) {
 
   if (dataset == 'total_cases') {
     country_real_data <- get_data_from_country(country)
@@ -45,7 +45,7 @@ obtain_nlm_fit <- function(country_dataset){
                control=nls.lm.control(maxiter=150))
 }
 
-analyze_model_parameters_over_time <-function(country, start_from=30, by=1, end=-1){
+analyze_model_parameters_over_time <-function(country, start_from=30, by=1, end=-1, save=-1){
   
   country_real_data <- get_data_from_country(country)
   country_fittable_data <- format_data_for_fitting(country_real_data)
@@ -66,6 +66,10 @@ analyze_model_parameters_over_time <-function(country, start_from=30, by=1, end=
   }
   
   plot_parameters_over_time(country, a_params, b_params, start_from, end, by)
+  
+  if (save != -1){
+    save_parameters_over_time(save, country, t_sequence, a_params, b_params)
+  }
   
 }
 

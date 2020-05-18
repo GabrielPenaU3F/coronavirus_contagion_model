@@ -33,7 +33,7 @@ save_data_to_workspace <- function(title, country, data){
 }
 
 save_data_to_csv <- function(title, country, data){
-  filename <- paste("mtbi_", format_country_name_for_saving(country), '.csv', sep='')
+  filename <- paste(title, format_country_name_for_saving(country), '.csv', sep='')
   write.csv(data, filename)
 }
 
@@ -43,5 +43,14 @@ save_mtbi <- function(save, country, days, mtbis){
     save_data_to_workspace('mtbi_', country, mtbi_data)
   } else if (save == 'csv'){
     save_data_to_csv('mtbi_', country, mtbi_data)
+  }
+}
+
+save_parameters_over_time <- function(save, country, days, a_s, b_s){
+  params_data <- create_parameters_over_time_dataframe(days, a_s, b_s)
+  if (save == 'workspace'){
+    save_data_to_workspace('params_over_time_', country, params_data)
+  } else if (save == 'csv'){
+    save_data_to_csv('params_over_time_', country, params_data)
   }
 }
