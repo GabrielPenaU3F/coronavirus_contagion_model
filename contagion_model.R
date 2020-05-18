@@ -45,7 +45,7 @@ obtain_nlm_fit <- function(country_dataset){
                control=nls.lm.control(maxiter=150))
 }
 
-analyze_model_parameters_over_time <-function(country, start_from=30, by=1, end=-1, save=-1){
+analyze_model_parameters_over_time <-function(country, start_from=30, by=1, end=-1){
   
   country_real_data <- get_data_from_country(country)
   country_fittable_data <- format_data_for_fitting(country_real_data)
