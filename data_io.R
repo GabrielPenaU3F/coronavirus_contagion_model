@@ -32,7 +32,7 @@ save_data_to_workspace <- function(title, country, data){
   assign(varname, data, inherits=TRUE)
 }
 
-save_data_to_csv <- function(data, filename){
+save_data_to_csv <- function(title, country, data){
   filename <- paste("mtbi_", format_country_name_for_saving(country), '.csv', sep='')
   write.csv(data, filename)
 }
@@ -42,6 +42,6 @@ save_mtbi <- function(save, country, days, mtbis){
   if (save == 'workspace'){
     save_data_to_workspace('mtbi_', country, mtbi_data)
   } else if (save == 'csv'){
-    save_data_to_csv('mtbi_', country, data)
+    save_data_to_csv('mtbi_', country, mtbi_data)
   }
 }
