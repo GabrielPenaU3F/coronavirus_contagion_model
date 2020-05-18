@@ -7,7 +7,7 @@ determine_plot_x_lim <- function(prediction_limit, dataset_length){
 }
 
 create_dataset_plot <- function(xy_points, country, dataset, x_limit, y_limit) {
-  title <- paste(format_dataset_name(dataset)," in ", format_country_name(country), sep="", collapse=NULL)
+  title <- paste(format_dataset_name_for_showing(dataset)," in ", format_country_name_for_showing(country), sep="", collapse=NULL)
   par(mfrow=c(1,1))
   plot(Y ~ x, data=xy_points, 
        type='l', main=title, xlab="t (days)", ylab=format_main_plot_ylabel(dataset), 
@@ -27,7 +27,7 @@ plot_parameters_over_time <- function(country, a_params, b_params, start, end, b
   par(mfrow=c(1,2))
   plot_param_over_time(a_params, start, end, by, paste(intToUtf8(961), " 1/day", sep=""), 'blue')
   plot_param_over_time(b_params, start, end, by, paste(intToUtf8(947), "/", intToUtf8(961), " day"), 'red')
-  mtext(paste("Model parameters over time, data from", format_country_name(country)), outer=TRUE, cex=1.5, line=-2)
+  mtext(paste("Model parameters over time, data from", format_country_name_for_showing(country)), outer=TRUE, cex=1.5, line=-2)
 }
 
 plot_param_over_time <- function(params, start, end, by, param_label, color) {

@@ -9,11 +9,6 @@ read_csv_data <- function(url) {
   csv <- read.csv(url(url))
 }
 
-save_data_to_csv <- function(data, filename){
-  filename <- paste(filename, '.csv', sep='')
-  write.csv(data, filename)
-}
-
 update_data <- function(){
   total_cases_dataset <<- read_csv_data(current_data_source)
   total_deaths_dataset <<- read_csv_data(current_deaths_source)
@@ -32,13 +27,21 @@ reset_data_sources_to_default <- function(){
   current_deaths_source <- default_deaths_source
 }
 
+save_data_to_workspace <- function(title, country, data){
+  varname <- paste(title, format_country_name_for_saving(country), sep = "")
+  assign(varname, data, inherits=TRUE)
+}
+
+save_data_to_csv <- function(data, filename){
+  filename <- paste("mtbi_", format_country_name_for_saving(country), '.csv', sep='')
+  write.csv(data, filename)
+}
+
 save_mtbi <- function(save, country, days, mtbis){
   mtbi_data <- create_mtbi_dataframe(days, mtbis)
   if (save == 'workspace'){
-    varname <- paste("mtbi_", country, sep = "")
-    assign(varname, mtbi_data, inherits=TRUE)
+    save_data_to_workspace('mtbi_', country, mtbi_data)
   } else if (save == 'csv'){
-    filename = paste("mtbi_", country, sep='')
-    save_data_to_csv(mtbi_data, filename)
+    save_data_to_csv('mtbi_', country, data)
   }
 }

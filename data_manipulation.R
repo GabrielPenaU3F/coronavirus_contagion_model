@@ -10,11 +10,17 @@ remove_nas <- function(data_vector){
   data <- as.vector(na.locf(data_vector))
 }
 
-format_country_name <- function(country_id){
+format_country_name_for_showing <- function(country_id){
   name <- gsub("[.]", " ", country_id)
 }
 
-format_dataset_name <- function(dataset_id){
+format_country_name_for_saving <- function(country_id){
+  name <- gsub("[.]", "_", country_id)
+  name <- tolower(name)
+}
+
+
+format_dataset_name_for_showing <- function(dataset_id){
   name_lowercase <- gsub("[_]", " ", dataset_id)
   name <- paste(toupper(substring(name_lowercase, 1,1)), substring(name_lowercase, 2), sep="", collapse=NULL)
   name

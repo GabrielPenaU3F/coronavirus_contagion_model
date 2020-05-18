@@ -1,7 +1,7 @@
 display_title <- function(dataset, country){
   cat("\n\n--------------------\n")
-  dataset_title <- format_dataset_name(dataset)
-  cat(paste(dataset_title, " in ", format_country_name(country), sep=""))
+  dataset_title <- format_dataset_name_for_showing(dataset)
+  cat(paste(dataset_title, " in ", format_country_name_for_showing(country), sep=""))
 }
 
 display_estimated_coefficients <- function(coefs){
