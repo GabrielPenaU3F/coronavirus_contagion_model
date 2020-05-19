@@ -6,6 +6,6 @@ source("optional_arguments_management.R")
 source("displayer.R")
 source("data_manipulation.R")
 source("goodness_of_fit.R")
-source("data_formatting.R")
+source("string_formatting.R")
 
 update_data()
