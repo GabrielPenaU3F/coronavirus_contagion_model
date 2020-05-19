@@ -23,11 +23,11 @@ add_plot_legend <- function(){
   legend("topleft", c("Observed cases", "Model prediction"), fill=c("black", "red"))
 }
 
-plot_parameters_over_time <- function(country, a_params, b_params, start, end, by) {
+plot_parameters_over_time <- function(country, dataset, a_params, b_params, start, end, by) {
   par(mfrow=c(1,2))
   plot_param_over_time(a_params, start, end, by, paste(intToUtf8(961), " 1/day", sep=""), 'blue')
   plot_param_over_time(b_params, start, end, by, paste(intToUtf8(947), "/", intToUtf8(961), " day"), 'red')
-  mtext(paste("Model parameters over time, data from", format_country_name_for_showing(country)), outer=TRUE, cex=1.5, line=-2)
+  mtext(paste("Model parameters over time, data from ", format_country_name_for_showing(country), ", ", tolower(format_dataset_name_for_showing(dataset)), " dataset", sep=""), outer=TRUE, cex=1.5, line=-2)
 }
 
 plot_param_over_time <- function(params, start, end, by, param_label, color) {
@@ -42,8 +42,11 @@ plot_param_over_time <- function(params, start, end, by, param_label, color) {
   )
 }
   
-plot_mbti <- function(country, mtbis, start, end, by){
+plot_mbti <- function(country, dataset, mtbis, start, end, by){
+  full_title <- format_mean_time_between_full_title(dataset, country)
+  mtb_letter <- format_mean_time_between_letter(dataset) 
   par(mfrow=c(1,1))
-  plot_param_over_time(mtbis, start, end, by, "Mean time between infections (days)", 'green')
+  plot_param_over_time(mtbis, start, end, by, paste("MTB", mtb_letter, " (days)"), 'green')
+  mtext(full_title, outer=TRUE, cex=1.5, line=-3)
 }
   
