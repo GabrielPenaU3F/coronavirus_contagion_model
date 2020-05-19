@@ -16,12 +16,22 @@ format_country_name_for_showing <- function(country_id){
 
 format_country_name_for_saving <- function(country_id){
   name <- gsub("[.]", "_", country_id)
+  name <- tolower(name)
 }
 
 format_dataset_name_for_showing <- function(dataset_id){
   name_lowercase <- gsub("[_]", " ", dataset_id)
   name <- paste(toupper(substring(name_lowercase, 1,1)), substring(name_lowercase, 2), sep="", collapse=NULL)
-  name
+}
+
+format_dataset_name_for_saving <- function(dataset_id){
+  name_lowercase <- gsub("[_]", " ", dataset_id)
+  name <- paste(toupper(substring(name_lowercase, 1,1)), substring(name_lowercase, 2), sep="", collapse=NULL)
+  name <- tolower(name)
+}
+
+format_varname_for_saving <- function(title, dataset_id, country_id){
+  varname <- paste(title, "_", format_dataset_name_for_saving(dataset_id), "_", format_country_name_for_saving(country_id), sep="")
 }
 
 format_mean_time_between_letter <- function(dataset_id){

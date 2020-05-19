@@ -27,30 +27,30 @@ reset_data_sources_to_default <- function(){
   current_deaths_source <- default_deaths_source
 }
 
-save_data_to_workspace <- function(title, country, data){
-  varname <- paste(title, format_country_name_for_saving(country), sep = "")
+save_data_to_workspace <- function(title, dataset, country, data){
+  varname <- format_varname_for_saving(title, dataset, country)
   assign(varname, data, inherits=TRUE)
 }
 
-save_data_to_csv <- function(title, country, data){
-  filename <- paste(title, format_country_name_for_saving(country), '.csv', sep='')
+save_data_to_csv <- function(title, dataset, country, data){
+  filename <- paste(format_varname_for_saving(title, dataset, country), '.csv', sep='')
   write.csv(data, filename)
 }
 
-save_mtbi <- function(save, country, days, mtbis){
+save_mtbi <- function(save, dataset, country, days, mtbis){
   mtbi_data <- create_mtbi_dataframe(days, mtbis)
   if (save == 'workspace'){
-    save_data_to_workspace('mtbi_', country, mtbi_data)
+    save_data_to_workspace('mtb', dataset, country, mtbi_data)
   } else if (save == 'csv'){
-    save_data_to_csv('mtbi_', country, mtbi_data)
+    save_data_to_csv('mtb', dataset, country, mtbi_data)
   }
 }
 
-save_parameters_over_time <- function(save, country, days, a_s, b_s){
+save_parameters_over_time <- function(save, dataset, country, days, a_s, b_s){
   params_data <- create_parameters_over_time_dataframe(days, a_s, b_s)
   if (save == 'workspace'){
-    save_data_to_workspace('params_over_time_', country, params_data)
+    save_data_to_workspace('params_over_time', dataset, country, params_data)
   } else if (save == 'csv'){
-    save_data_to_csv('params_over_time_', country, params_data)
+    save_data_to_csv('params_over_time', dataset, country, params_data)
   }
 }

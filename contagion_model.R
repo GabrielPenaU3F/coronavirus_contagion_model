@@ -64,7 +64,7 @@ analyze_model_parameters_over_time <-function(country, start_from=30, by=1, end=
   plot_parameters_over_time(country, dataset, a_params, b_params, start_from, end, by)
   
   if (save != -1){
-    save_parameters_over_time(save, country, t_sequence, a_params, b_params)
+    save_parameters_over_time(save, dataset, country, t_sequence, a_params, b_params)
   }
   
 }
@@ -91,7 +91,7 @@ calculate_mtbi <- function(country, start_from=30, by=1, end=-1, save=-1, datase
   plot_mbti(country, dataset, mtbis, start_from, end, by)
   
   if (save != -1){
-    save_mtbi(save, country, t_sequence, mtbis)
+    save_mtbi(save, dataset, country, t_sequence, mtbis)
   }
 }
 
