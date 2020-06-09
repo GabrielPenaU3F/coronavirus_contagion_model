@@ -25,6 +25,6 @@ create_parameters_over_time_dataframe <- function(days, a_s, b_s){
     gamma <- a_s,
     gamma_over_rho <- b_s
   )
-  colnames(params_data) <- c('day', 'gamma', 'gamma/rho')
+  colnames(params_data) <- c('day', 'rho', 'gamma/rho')
   params_data
 }
