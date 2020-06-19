@@ -26,7 +26,7 @@ add_plot_legend <- function(){
 plot_parameters_over_time <- function(country, dataset, a_params, b_params, start, end, by) {
   par(mfrow=c(1,2))
   plot_param_over_time(a_params, start, end, by, paste(intToUtf8(961), " 1/day", sep=""), 'blue')
-  plot_param_over_time(b_params, start, end, by, paste(intToUtf8(947), "/", intToUtf8(961), " day"), 'red')
+  plot_param_over_time(b_params, start, end, by, paste(intToUtf8(947), "/", intToUtf8(961)), 'red')
   mtext(paste("Model parameters over time, data from ", format_country_name_for_showing(country), ", ", tolower(format_dataset_name_for_showing(dataset)), " dataset", sep=""), outer=TRUE, cex=1.5, line=-2)
 }
 
