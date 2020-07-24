@@ -7,5 +7,6 @@ source("displayer.R")
 source("data_manipulation.R")
 source("goodness_of_fit.R")
 source("string_formatting.R")
+source("unit_management.R")
 
 update_data()

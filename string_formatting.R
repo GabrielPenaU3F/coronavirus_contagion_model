@@ -43,3 +43,12 @@ format_mean_time_between_full_title <- function(dataset_id, country_id){
 format_main_plot_ylabel <- function(dataset){
   ylabel <- paste('Number of ', gsub(paste0('total_',collapse = "|"),"", dataset))
 }
+
+get_unit_string <- function(plot_unit){
+  if (plot_unit == 'day'){
+    string <- '(days)'
+  } else if (plot_unit  == 'min') {
+    string <- '(min)'
+  }
+  string
+}

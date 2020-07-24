@@ -69,7 +69,7 @@ analyze_model_parameters_over_time <-function(country, start_from=30, by=1, end=
   
 }
 
-calculate_mtbi <- function(country, start_from=30, by=1, end=-1, save=-1, dataset='total_cases'){
+calculate_mtbi <- function(country, start_from=30, by=1, end=-1, save=-1, dataset='total_cases', plot_unit='day'){
   
   country_real_data <- select_dataset(dataset, country)
   country_fittable_data <- format_data_for_fitting(country_real_data)
@@ -88,7 +88,7 @@ calculate_mtbi <- function(country, start_from=30, by=1, end=-1, save=-1, datase
     mtbis <- c(mtbis, mtbi)
   }
   
-  plot_mbti(country, dataset, mtbis, start_from, end, by)
+  plot_mbti(country, dataset, mtbis, start_from, end, by, plot_unit)
   
   if (save != -1){
     save_mtbi(save, dataset, country, t_sequence, mtbis)

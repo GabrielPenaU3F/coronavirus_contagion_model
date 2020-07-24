@@ -42,11 +42,13 @@ plot_param_over_time <- function(params, start, end, by, param_label, color) {
   )
 }
   
-plot_mbti <- function(country, dataset, mtbis, start, end, by){
+plot_mbti <- function(country, dataset, mtbis, start, end, by, plot_unit){
   full_title <- format_mean_time_between_full_title(dataset, country)
   mtb_letter <- format_mean_time_between_letter(dataset) 
   par(mfrow=c(1,1))
-  plot_param_over_time(mtbis, start, end, by, paste("MTB", mtb_letter, " (days)"), 'green')
+  unit_string <- get_unit_string(plot_unit)
+  mtbis <- select_right_units(mtbis, plot_unit)
+  plot_param_over_time(mtbis, start, end, by, paste("MTB", mtb_letter, " ", unit_string), 'green')
   mtext(full_title, outer=TRUE, cex=1.5, line=-3)
 }
   
