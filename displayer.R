@@ -26,12 +26,14 @@ display_end_of_printing <- function(){
 
 display_mtbi_minimum <- function(minimum_status, minimum, plot_unit){
   string_minimum_status <- get_minimum_status_string(minimum_status)
+  minimum <- select_right_units(minimum, plot_unit)
+  unit_string <- get_unit_string(plot_unit)
   cat("\n--------------------\n\n")
   cat(paste("Minimum status:", string_minimum_status, "\n"))
   if (minimum_status == TRUE){
-    minimum <- select_right_units(minimum, plot_unit)
-    unit_string <- get_unit_string(plot_unit)
     cat(paste("MTBI Minimum:", minimum, unit_string))
+  } else if (minimum_status == FALSE){
+    cat(paste("Actual MTBI:", minimum, unit_string))
   }
   cat("\n--------------------\n")
 }
