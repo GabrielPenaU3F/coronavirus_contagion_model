@@ -28,3 +28,12 @@ create_parameters_over_time_dataframe <- function(days, a_s, b_s){
   colnames(params_data) <- c('day', 'rho', 'gamma/rho')
   params_data
 }
+
+create_fit_dataframe <- function(days, predicted_values){
+  fit_data <- data.frame(
+    day <- days,
+    values <- predicted_values
+  )
+  colnames(fit_data) <- c('day', 'values')
+  fit_data
+}

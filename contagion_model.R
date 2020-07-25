@@ -19,7 +19,8 @@ fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1, data
   
   nlm_fit <- obtain_nlm_fit(subset_xy_points)
   coefs <- coef(nlm_fit)
-  predicted_values <- predict(nlm_fit, newdata = data.frame(x = 1:prediction_limit))
+  days <- 1:prediction_limit
+  predicted_values <- predict(nlm_fit, newdata = data.frame(x = days))
   
   display_title(dataset, country)
   display_estimated_coefficients(coefs)
@@ -33,6 +34,9 @@ fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1, data
   add_prediction_plot(prediction_x_limit, predicted_values)
   add_plot_legend()
   
+  if (save != -1){
+    save_fit(save, dataset, country, days, predicted_values)
+  }
 }
 
 obtain_nlm_fit <- function(country_dataset){

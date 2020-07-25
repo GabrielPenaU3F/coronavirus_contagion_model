@@ -54,3 +54,12 @@ save_parameters_over_time <- function(save, dataset, country, days, a_s, b_s){
     save_data_to_csv('params_over_time', dataset, country, params_data)
   }
 }
+
+save_fit <- function(save, dataset, country, days, predicted_values){
+  fit_data <- create_fit_dataframe(days, predicted_values)
+  if (save == 'workspace'){
+    save_data_to_workspace('fit', dataset, country, fit_data)
+  } else if (save == 'csv'){
+    save_data_to_csv('fit', dataset, country, fit_data)
+  }
+}
