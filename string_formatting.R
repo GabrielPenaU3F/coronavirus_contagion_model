@@ -49,6 +49,16 @@ get_unit_string <- function(plot_unit){
     string <- '(days)'
   } else if (plot_unit  == 'min') {
     string <- '(min)'
+  } else if (plot_unit == 'seg'){
+    string <- '(seg)'
   }
   string
+}
+
+get_minimum_status_string <- function(minimum_status){
+  if (minimum_status == TRUE){
+    'REACHED'
+  } else if (minimum_status == FALSE){
+    'NOT REACHED'
+  }
 }

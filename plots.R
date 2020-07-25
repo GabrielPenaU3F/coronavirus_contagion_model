@@ -48,7 +48,7 @@ plot_mbti <- function(country, dataset, mtbis, start, end, by, plot_unit){
   par(mfrow=c(1,1))
   unit_string <- get_unit_string(plot_unit)
   mtbis <- select_right_units(mtbis, plot_unit)
-  plot_param_over_time(mtbis, start, end, by, paste("MTB", mtb_letter, " ", unit_string), 'green')
+  plot_param_over_time(mtbis, start, end, by, paste("MTB", mtb_letter, " ", unit_string, sep="", collapse=NULL), 'green')
   mtext(full_title, outer=TRUE, cex=1.5, line=-3)
 }
   

@@ -88,7 +88,10 @@ calculate_mtbi <- function(country, start_from=30, by=1, end=-1, save=-1, datase
     mtbis <- c(mtbis, mtbi)
   }
   
+  minimum_status <- check_minimum_status(mtbis)
+  
   plot_mbti(country, dataset, mtbis, start_from, end, by, plot_unit)
+  display_mtbi_minimum(minimum_status, min(mtbis), plot_unit)
   
   if (save != -1){
     save_mtbi(save, dataset, country, t_sequence, mtbis)
@@ -105,4 +108,8 @@ determine_coefficients_until <- function(fittable_data, end){
 calculate_estimated_mtbi <- function(a, b, day){
   parenthesis = 1 + a * day
   mtbi <- parenthesis / (a * (parenthesis^b - 1))
+}
+
+check_minimum_status <- function(mtbis){
+  min(mtbis) != mtbis[length(mtbis)]
 }

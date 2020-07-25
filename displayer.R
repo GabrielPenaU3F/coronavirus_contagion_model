@@ -16,10 +16,22 @@ display_estimated_coefficients <- function(coefs){
 display_fit_statistics <- function(real_values, predicted_values){
   rsquared <- calculate_determination_coefficient(real_values, predicted_values)
   cat("\n--------------------\n\n")
-  cat("Goodness of fit statistics: \n\n")
-  cat(paste("R2 determination coefficient: "), rsquared, "\n")
+  cat("Goodness of fit statistics:\n\n")
+  cat(paste("R2 determination coefficient:"), rsquared, "\n")
 }
 
 display_end_of_printing <- function(){
   cat("\n--------------------\n\n")
+}
+
+display_mtbi_minimum <- function(minimum_status, minimum, plot_unit){
+  string_minimum_status <- get_minimum_status_string(minimum_status)
+  cat("\n--------------------\n\n")
+  cat(paste("Minimum status:", string_minimum_status, "\n"))
+  if (minimum_status == TRUE){
+    minimum <- select_right_units(minimum, plot_unit)
+    unit_string <- get_unit_string(plot_unit)
+    cat(paste("MTBI Minimum:", minimum, unit_string))
+  }
+  cat("\n--------------------\n")
 }
