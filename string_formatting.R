@@ -8,13 +8,12 @@ format_country_name_for_saving <- function(country_id){
 }
 
 format_dataset_name_for_showing <- function(dataset_id){
-  name_lowercase <- gsub("[_]", " ", dataset_id)
-  name <- paste(toupper(substring(name_lowercase, 1,1)), substring(name_lowercase, 2), sep="", collapse=NULL)
+  name_underscore <- gsub("[_]", " ", dataset_id)
+  name <- paste(toupper(substring(name_underscore, 1,1)), substring(name_underscore, 2), sep="", collapse=NULL)
 }
 
 format_dataset_name_for_saving <- function(dataset_id){
-  name_lowercase <- gsub("[_]", " ", dataset_id)
-  name <- paste(toupper(substring(name_lowercase, 1,1)), substring(name_lowercase, 2), sep="", collapse=NULL)
+  name <- paste(toupper(substring(dataset_id, 1,1)), substring(dataset_id, 2), sep="", collapse=NULL)
   name <- tolower(name)
 }
 
