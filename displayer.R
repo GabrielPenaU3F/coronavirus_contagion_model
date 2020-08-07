@@ -15,9 +15,11 @@ display_estimated_coefficients <- function(coefs){
 
 display_fit_statistics <- function(real_values, predicted_values){
   rsquared <- calculate_determination_coefficient(real_values, predicted_values)
+  rmse <- calculate_rmse(real_values, predicted_values)
   cat("\n--------------------\n\n")
   cat("Goodness of fit statistics:\n\n")
   cat(paste("R2 determination coefficient:"), rsquared, "\n")
+  cat(paste("Root mean squared error:"), rmse, "\n")
 }
 
 display_end_of_printing <- function(){
