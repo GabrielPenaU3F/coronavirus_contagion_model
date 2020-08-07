@@ -6,10 +6,6 @@ calculate_determination_coefficient <- function(real_data, estimated_data){
   estimation_variance / data_variance
 }
 
-calculate_rmse <- function(real_data, estimated_data){
-  rmse(real_data, estimated_data)
-}
-
 calculate_rrse <- function(real_data, estimated_data){
   rrse(real_data, estimated_data)
 }
