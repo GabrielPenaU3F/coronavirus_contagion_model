@@ -86,4 +86,4 @@ Example 14. You want to fit the model to the argentinian dataset, but not to the
 
 Example 15. You want to see the MTBI of the argentinian dataset, shown in minutes and seconds. You want the following commands:
 >calculate_mtbi("Argentina", plot_unit='min')
->calculate_mtbi("Argentina", plot_unit='seg')
+>calculate_mtbi("Argentina", plot_unit='sec')
