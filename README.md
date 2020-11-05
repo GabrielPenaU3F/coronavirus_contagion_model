@@ -1,4 +1,5 @@
 # covid19_contagion_model
+MODEL REFERENCE: we published our model's details in https://doi.org/10.1016/j.chaos.2020.110297
 
 SOURCE: the data we use comes from the Our World In Data website: https://ourworldindata.org/coronavirus-source-data
 
