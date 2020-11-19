@@ -9,13 +9,12 @@ fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1, data
   
   start <- determine_subset_start(start)
   end <- determine_subset_end(country_fittable_data, end)
-  prediction_limit <- determine_prediction_limit(predict_until, end)
+  prediction_limit <- determine_prediction_limit(predict_until, end) - start
   
-  requested_subset <- country_fittable_data[start:end]
+  requested_subset <- country_fittable_data[start:end] - country_fittable_data[[start]] 
   len_subset <- length(requested_subset)
   
-  dataset_xy_points<- list("x" = c(1:len_dataset),"Y" = country_fittable_data)
-  subset_xy_points <- list("x" = c(start:end),"Y" = requested_subset)
+  subset_xy_points <- list("x" = c(1:len_subset),"Y" = requested_subset)
   
   nlm_fit <- obtain_nlm_fit(subset_xy_points)
   coefs <- coef(nlm_fit)
@@ -28,10 +27,10 @@ fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1, data
   display_end_of_printing()
   
   prediction_x_limit <- prediction_limit
-  visual_x_limit <- determine_plot_x_lim(prediction_limit, length(country_fittable_data))
+  visual_x_limit <- determine_plot_x_lim(prediction_limit, len_subset)
   y_limit <- determine_plot_y_lim(requested_subset, predicted_values)
-  create_dataset_plot(dataset_xy_points, country, dataset, visual_x_limit, y_limit) 
-  add_prediction_plot(prediction_x_limit, predicted_values)
+  create_dataset_plot(requested_subset, country, dataset, visual_x_limit, y_limit) 
+  add_prediction_plot(start, prediction_x_limit, predicted_values)
   add_plot_legend()
   
   if (save != -1){

@@ -6,7 +6,8 @@ determine_plot_x_lim <- function(prediction_limit, dataset_length){
   x_lim <- max(prediction_limit, dataset_length)
 }
 
-create_dataset_plot <- function(xy_points, country, dataset, x_limit, y_limit) {
+create_dataset_plot <- function(requested_subset, country, dataset, x_limit, y_limit) {
+  xy_points <- list("x" = c(1:length(requested_subset)),"Y" = requested_subset)
   title <- paste(format_dataset_name_for_showing(dataset)," in ", format_country_name_for_showing(country), sep="", collapse=NULL)
   par(mfrow=c(1,1))
   plot(Y ~ x, data=xy_points, 
@@ -15,7 +16,7 @@ create_dataset_plot <- function(xy_points, country, dataset, x_limit, y_limit) {
   )
 }
 
-add_prediction_plot <- function(prediction_x_limit, predicted_values){
+add_prediction_plot <- function(start, prediction_x_limit, predicted_values){
   lines(1:prediction_x_limit, predicted_values, col='red')
 }
 

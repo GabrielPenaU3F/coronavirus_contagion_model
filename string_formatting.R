@@ -48,8 +48,8 @@ get_unit_string <- function(plot_unit){
     string <- '(days)'
   } else if (plot_unit  == 'min') {
     string <- '(min)'
-  } else if (plot_unit == 'seg'){
-    string <- '(seg)'
+  } else if (plot_unit == 'sec'){
+    string <- '(sec)'
   }
   string
 }
