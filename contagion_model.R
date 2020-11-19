@@ -9,7 +9,7 @@ fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1, data
   
   start <- determine_subset_start(start)
   end <- determine_subset_end(country_fittable_data, end)
-  prediction_limit <- determine_prediction_limit(predict_until, end) - start
+  prediction_limit <- determine_prediction_limit(predict_until, start, end)
   
   requested_subset <- country_fittable_data[start:end] - country_fittable_data[[start]] 
   len_subset <- length(requested_subset)
