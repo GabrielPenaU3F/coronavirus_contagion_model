@@ -20,3 +20,9 @@ determine_prediction_limit <- function(predict_until_argument, start, end){
 determine_subset_start <- function(start){
   subset_start <- max(1, start)
 }
+
+validate_start_from <- function(start_from, dataset_length) {
+  if (start_from > dataset_length){
+    stop("start_from argument must be lower than the requested dataset length")
+  }
+}

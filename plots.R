@@ -24,11 +24,11 @@ add_plot_legend <- function(){
   legend("topleft", c("Observed cases", "Model prediction"), fill=c("black", "red"))
 }
 
-plot_parameters_over_time <- function(country, dataset, a_params, b_params, start, end, by) {
+plot_parameters_over_time <- function(country, dataset_id, a_params, b_params, start, by, end) {
   par(mfrow=c(1,2))
   plot_param_over_time(a_params, start, end, by, paste(intToUtf8(961), " 1/day", sep=""), 'blue')
   plot_param_over_time(b_params, start, end, by, paste(intToUtf8(947), "/", intToUtf8(961)), 'red')
-  mtext(paste("Model parameters over time, data from ", format_country_name_for_showing(country), ", ", tolower(format_dataset_name_for_showing(dataset)), " dataset", sep=""), outer=TRUE, cex=1.5, line=-2)
+  mtext(paste("Model parameters over time, data from ", format_country_name_for_showing(country), ", ", tolower(format_dataset_name_for_showing(dataset_id)), " dataset", sep=""), outer=TRUE, cex=1.5, line=-2)
 }
 
 plot_param_over_time <- function(params, start, end, by, param_label, color) {
@@ -43,9 +43,9 @@ plot_param_over_time <- function(params, start, end, by, param_label, color) {
   )
 }
   
-plot_mbti <- function(country, dataset, mtbis, start, end, by, plot_unit){
-  full_title <- format_mean_time_between_full_title(dataset, country)
-  mtb_letter <- format_mean_time_between_letter(dataset) 
+plot_mbti <- function(country, dataset, dataset_id, mtbis, start, by, end, plot_unit){
+  full_title <- format_mean_time_between_full_title(dataset_id, country)
+  mtb_letter <- format_mean_time_between_letter(dataset_id) 
   par(mfrow=c(1,1))
   unit_string <- get_unit_string(plot_unit)
   mtbis <- select_right_units(mtbis, plot_unit)

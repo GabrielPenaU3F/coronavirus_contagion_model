@@ -7,11 +7,11 @@ fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1, data
   country_fittable_data <- format_data_for_fitting(country_real_data)
   len_dataset <- length(country_fittable_data)
   
-  start <- determine_subset_start(start)
-  end <- determine_subset_end(country_fittable_data, end)
-  prediction_limit <- determine_prediction_limit(predict_until, start, end)
+  subset_start <- determine_subset_start(start)
+  subset_end <- determine_subset_end(country_fittable_data, end)
+  prediction_limit <- determine_prediction_limit(predict_until, subset_start, subset_end)
   
-  requested_subset <- country_fittable_data[start:end] - country_fittable_data[[start]] 
+  requested_subset <- country_fittable_data[subset_start:subset_end] - country_fittable_data[[subset_start]] 
   len_subset <- length(requested_subset)
   
   subset_xy_points <- list("x" = c(1:len_subset),"Y" = requested_subset)
@@ -44,27 +44,32 @@ obtain_nlm_fit <- function(country_dataset){
                control=nls.lm.control(maxiter=150))
 }
 
-analyze_model_parameters_over_time <-function(country, start_from=30, by=1, end=-1, save=-1, dataset='total_cases'){
+analyze_model_parameters_over_time <-function(country, start=1, start_from=30, by=1, end=-1, save=-1, dataset='total_cases'){
   
   country_real_data <- select_dataset(dataset, country)
   country_fittable_data <- format_data_for_fitting(country_real_data)
-  end <- determine_subset_end(country_fittable_data, end)
+  subset_start <- determine_subset_start(start)
+  subset_end <- determine_subset_end(country_fittable_data, end)
+  
+  requested_subset <- country_fittable_data[subset_start:subset_end] - country_fittable_data[[subset_start]] 
+  len_subset <- length(requested_subset)
+  validate_start_from(start_from, len_subset)
   
   a_params <- vector()
   b_params <- vector()
-  t_sequence <- seq(start_from, end, by)
-  if (!(end %in% t_sequence)){
-    t_sequence <- c(t_sequence, end)
+  t_sequence <- seq(start_from, len_subset, by)
+  if (!(len_subset %in% t_sequence)){
+    t_sequence <- c(t_sequence, len_subset)
   }
   for (index in t_sequence) {
-    coefs <- determine_coefficients_until(country_fittable_data, index)
+    coefs <- determine_coefficients_until(requested_subset, index)
     a <- coefs[1]
     b <- coefs[2]
     a_params <- c(a_params, a)
     b_params <- c(b_params, b)
   }
   
-  plot_parameters_over_time(country, dataset, a_params, b_params, start_from, end, by)
+  plot_parameters_over_time(country, dataset, a_params, b_params, start_from, by, len_subset)
   
   if (save != -1){
     save_parameters_over_time(save, dataset, country, t_sequence, a_params, b_params)
@@ -72,16 +77,21 @@ analyze_model_parameters_over_time <-function(country, start_from=30, by=1, end=
   
 }
 
-calculate_mtbi <- function(country, start_from=30, by=1, end=-1, save=-1, dataset='total_cases', plot_unit='day'){
+calculate_mtbi <- function(country, start=1, start_from=30, by=1, end=-1, save=-1, dataset='total_cases', plot_unit='day'){
   
   country_real_data <- select_dataset(dataset, country)
   country_fittable_data <- format_data_for_fitting(country_real_data)
-  end <- determine_subset_end(country_fittable_data, end)
+  subset_start <- determine_subset_start(start)
+  subset_end <- determine_subset_end(country_fittable_data, end)
+  
+  requested_subset <- country_fittable_data[subset_start:subset_end] - country_fittable_data[[subset_start]] 
+  len_subset <- length(requested_subset)
+  validate_start_from(start_from, len_subset)
 
   mtbis <- vector()
-  t_sequence <- seq(start_from, end, by)
-  if (!(end %in% t_sequence)){
-    t_sequence <- c(t_sequence, end)
+  t_sequence <- seq(start_from, len_subset, by)
+  if (!(len_subset %in% t_sequence)){
+    t_sequence <- c(t_sequence, len_subset)
   }
   for (index in t_sequence) {
     coefs <- determine_coefficients_until(country_fittable_data, index)
@@ -93,7 +103,7 @@ calculate_mtbi <- function(country, start_from=30, by=1, end=-1, save=-1, datase
   
   minimum_status <- check_minimum_status(mtbis)
   
-  plot_mbti(country, dataset, mtbis, start_from, end, by, plot_unit)
+  plot_mbti(country, requested_subset, dataset, mtbis, start_from, by, len_subset, plot_unit)
   display_mtbi_minimum(minimum_status, min(mtbis), plot_unit)
   
   if (save != -1){
