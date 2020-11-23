@@ -163,9 +163,9 @@ In addition, we provide a function to reset the source to the default Our World 
 
 # CREDITS
 
-- Dr. Néstor Barraza (leader of the research team and original autor of the model)  
-- Eng. Gabriel Pena (researcher and developer of this software)  
-- Dr. Verónica Moreno (researcher and the mathematics expert of the team)  
-- UNTREF Universidad Nacional de Tres de Febrero (sponsor) 
+- [Dr. Néstor Barraza](https://www.researchgate.net/profile/Nestor_Barraza) (leader of the research team and original autor of the model)  
+- [Eng. Gabriel Pena](https://www.researchgate.net/profile/Gabriel_Pena4) (researcher and developer of this software)  
+- [Dr. Verónica Moreno](https://www.researchgate.net/profile/Veronica_Moreno17) (researcher and the mathematics expert of the team)  
+- [UNTREF Universidad Nacional de Tres de Febrero](https://untref.edu.ar/) (sponsor) 
 
 
