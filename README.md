@@ -22,7 +22,7 @@ The program currently has three main features.
 
 - Fit the model to some selected dataset, therefore obtaining the model parameters and the mean value curve.
 - Evaluate the evolution of the model parameters over time and display their respective curves.
-- Calculate the mean time between failures and show its curve.
+- Calculate the mean time between infections and show its curve.
 
 Additionally, we provide some useful minor functions.
 
