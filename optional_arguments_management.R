@@ -10,7 +10,7 @@ determine_prediction_limit <- function(predict_until_argument, start, end){
   if (predict_until_argument < end - start & predict_until_argument != -1) {
     stop("predict_until argument is lower than the indicated dataset end")
   }  else if (predict_until_argument == -1) {
-    prediction_limit <- end - start
+    prediction_limit <- end - start + 1
   } else {
     prediction_limit <- predict_until_argument - start
   }

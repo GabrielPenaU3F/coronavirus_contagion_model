@@ -23,7 +23,7 @@ fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1, data
   
   display_title(dataset, country)
   display_estimated_coefficients(coefs)
-  display_fit_statistics(requested_subset, predicted_values[start:length(predicted_values)])
+  display_fit_statistics(requested_subset, predicted_values)
   display_end_of_printing()
   
   prediction_x_limit <- prediction_limit
