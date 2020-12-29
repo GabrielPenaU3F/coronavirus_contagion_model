@@ -6,7 +6,11 @@ current_data_source <- default_data_source
 current_deaths_source <- default_deaths_source
 
 read_csv_data <- function(url) {
-  csv <- read.csv(url(url))
+  if (startsWith(url, 'http')){
+    csv <- read.csv(url(url))
+  } else {
+    csv <- read.csv(file = url)
+  }
 }
 
 update_data <- function(){
