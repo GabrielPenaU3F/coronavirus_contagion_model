@@ -11,7 +11,7 @@ fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1, data
   subset_end <- determine_subset_end(country_fittable_data, end)
   prediction_limit <- determine_prediction_limit(predict_until, subset_start, subset_end)
   
-  requested_subset <- country_fittable_data[subset_start:subset_end] - country_fittable_data[[subset_start]] 
+  requested_subset <- country_fittable_data[subset_start:subset_end] - country_fittable_data[[subset_start -  1]] 
   len_subset <- length(requested_subset)
   
   subset_xy_points <- list("x" = c(1:len_subset),"Y" = requested_subset)
@@ -51,7 +51,7 @@ analyze_model_parameters_over_time <-function(country, start=1, start_from=30, b
   subset_start <- determine_subset_start(start)
   subset_end <- determine_subset_end(country_fittable_data, end)
   
-  requested_subset <- country_fittable_data[subset_start:subset_end] - country_fittable_data[[subset_start]] 
+  requested_subset <- country_fittable_data[subset_start:subset_end] - country_fittable_data[[subset_start - 1]] 
   len_subset <- length(requested_subset)
   validate_start_from(start_from, len_subset)
   
@@ -84,7 +84,7 @@ calculate_mtbi <- function(country, start=1, start_from=30, by=1, end=-1, save=-
   subset_start <- determine_subset_start(start)
   subset_end <- determine_subset_end(country_fittable_data, end)
   
-  requested_subset <- country_fittable_data[subset_start:subset_end] - country_fittable_data[[subset_start]] 
+  requested_subset <- country_fittable_data[subset_start:subset_end] - country_fittable_data[[subset_start - 1]] 
   len_subset <- length(requested_subset)
   validate_start_from(start_from, len_subset)
 

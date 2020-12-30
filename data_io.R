@@ -5,11 +5,11 @@ default_deaths_source <-  'https://covid.ourworldindata.org/data/ecdc/total_deat
 current_data_source <- default_data_source
 current_deaths_source <- default_deaths_source
 
-read_csv_data <- function(url) {
+read_csv_data <- function(url, sep = ',') {
   if (startsWith(url, 'http')){
-    csv <- read.csv(url(url))
+    csv <- read.csv(url(url), sep=sep)
   } else {
-    csv <- read.csv(file = url)
+    csv <- read.csv(file = url, sep=sep)
   }
 }
 
