@@ -94,7 +94,7 @@ calculate_mtbi <- function(country, start=1, start_from=30, by=1, end=-1, save=-
     t_sequence <- c(t_sequence, len_subset)
   }
   for (index in t_sequence) {
-    coefs <- determine_coefficients_until(country_fittable_data, index)
+    coefs <- determine_coefficients_until(requested_subset, index)
     a <- coefs[1]
     b <- coefs[2]
     mtbi <- calculate_estimated_mtbi(a, b, index)
