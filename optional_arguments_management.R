@@ -26,3 +26,11 @@ validate_start_from <- function(start_from, dataset_length) {
     stop("start_from argument must be lower than the requested dataset length")
   }
 }
+
+determine_requested_subset <- function(data, start, end){
+  if (start > 1){
+    requested_subset <- data[start:end] - data[[start - 1]]
+  } else {
+    requested_subset <- data[start:end]
+  }
+}
