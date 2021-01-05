@@ -3,7 +3,7 @@ library(minpack.lm)
 
 fit_contagion_model <- function(country, predict_until=-1, start=1, end=-1, dataset='total_cases', save=-1) {
 
-  country_real_data <- select_dataset(dataset, country)
+  country_real_data <- get_data_from_country(country, dataset)
   country_fittable_data <- format_data_for_fitting(country_real_data)
   len_dataset <- length(country_fittable_data)
   
@@ -46,7 +46,7 @@ obtain_nlm_fit <- function(country_dataset){
 
 analyze_model_parameters_over_time <-function(country, start=1, start_from=30, by=1, end=-1, save=-1, dataset='total_cases'){
   
-  country_real_data <- select_dataset(dataset, country)
+  country_real_data <- get_data_from_country(country, dataset)
   country_fittable_data <- format_data_for_fitting(country_real_data)
   subset_start <- determine_subset_start(start)
   subset_end <- determine_subset_end(country_fittable_data, end)
@@ -79,7 +79,7 @@ analyze_model_parameters_over_time <-function(country, start=1, start_from=30, b
 
 calculate_mtbi <- function(country, start=1, start_from=30, by=1, end=-1, save=-1, dataset='total_cases', plot_unit='day'){
   
-  country_real_data <- select_dataset(dataset, country)
+  country_real_data <- get_data_from_country(country, dataset)
   country_fittable_data <- format_data_for_fitting(country_real_data)
   subset_start <- determine_subset_start(start)
   subset_end <- determine_subset_end(country_fittable_data, end)
