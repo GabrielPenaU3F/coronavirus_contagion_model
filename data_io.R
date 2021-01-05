@@ -1,9 +1,7 @@
 library(RCurl)
 
-default_data_source <- 'https://covid.ourworldindata.org/data/ecdc/total_cases.csv'
-default_deaths_source <-  'https://covid.ourworldindata.org/data/ecdc/total_deaths.csv'
+default_data_source <- 'https://covid.ourworldindata.org/data/owid-covid-data.csv'
 current_data_source <- default_data_source
-current_deaths_source <- default_deaths_source
 
 read_csv_data <- function(url, sep = ',') {
   if (startsWith(url, 'http')){
@@ -14,21 +12,16 @@ read_csv_data <- function(url, sep = ',') {
 }
 
 update_data <- function(){
-  total_cases_dataset <<- read_csv_data(current_data_source)
-  total_deaths_dataset <<- read_csv_data(current_deaths_source)
+  full_dataset <<- read_csv_data(current_data_source)
 }
 
 change_data_source_url <- function(url){
   current_data_source <- url
 }
 
-change_deaths_source_url <- function(url){
-  current_deaths_source <- url
-}
 
 reset_data_sources_to_default <- function(){
   current_data_source <- default_data_source
-  current_deaths_source <- default_deaths_source
 }
 
 save_data_to_workspace <- function(title, dataset, country, data){
