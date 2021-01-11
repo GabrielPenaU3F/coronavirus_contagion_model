@@ -23,7 +23,7 @@ determine_subset_start <- function(start){
 
 validate_start_from <- function(start_from, dataset_length) {
   if (start_from > dataset_length){
-    stop("start_from argument must be lower than the requested dataset length")
+    stop("The fitting start index exceeds the dataset length. The number of data may be insufficient. Try setting a lower start_from value")
   }
 }
 
