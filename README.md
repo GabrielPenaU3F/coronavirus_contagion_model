@@ -3,9 +3,10 @@
 
 ## MODEL REFERENCE 
 
-Out model's main article:
-
+Our model's main article:
 [A non-homogeneous Markov early epidemic growth dynamics model. Application to the SARS-CoV-2 pandemic](https://doi.org/10.1016/j.chaos.2020.110297)
+
+Software DOI: https://doi.org/10.5281/zenodo.4609435
 
 ## SOURCE
 The data we use comes from the Our World In Data website: 
